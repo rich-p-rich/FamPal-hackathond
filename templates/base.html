@@ -33,31 +33,51 @@
 
     {% block navbar %}
     <nav class="navbar navbar-expand-sm bg-body-tertiary">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'index' %}">FamPal</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
-          aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+    <div class="container">
+      <!-- Left: Brand or logo -->
+      <a class="navbar-brand d-flex align-items-center" href="{% url 'index' %}">
+        FamPal
+      </a>
 
-        <div class="collapse navbar-collapse" id="navbarText">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <!-- Hamburger for small screens -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Right: Menu links -->
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'index' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'help' %}">Help Desk</a>
+          </li>
+          <!-- User links -->
+          {% if user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'about' %}">About</a>
+              <a class="nav-link" href="{% url 'profile' %}">Profile</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+              <a class="nav-link" href="{% url 'families:family_list' %}">My Groups</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'help' %}">Help</a>
+              <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
             </li>
-          </ul>
-          <span class="navbar-text">
-            Your AI Family Assistant
-          </span>
-        </div>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'account_login' %}">Login / Sign Up</a>
+            </li>
+          {% endif %}
+        </ul>
       </div>
-    </nav>
+    </div>
+  </nav>
+    {% endblock %}
+
+    {% block sidebar %}
+
     {% endblock %}
 
 
@@ -70,9 +90,39 @@
 
     <!-- Footer Block -->
     {% block footer %}
-    <footer>
-        <p>&copy; 2025 FamPal. All rights reserved.</p>
-    </footer>
+    
+    <div class="b-example-divider"></div>
+
+    <div class="container">
+      <footer class="py-3 my-4">
+        <p class="text-center text-muted border-bottom">Built with ❤️ at the 2025 Hackathon by:</p>
+
+        <ul class="nav justify-content-center pb-3 mb-3">
+          <li class="nav-item">
+            <a href="https://github.com/MiaRasmussen05" target="_blank" class="nav-link px-2 text-muted">Mia</a>
+          </li>
+          <li class="nav-item">
+            <a href="https://github.com/ujuadimora-dev" target="_blank" class="nav-link px-2 text-muted">Adimora</a>
+          </li>
+          <li class="nav-item">
+            <a href="https://github.com/xttrust" target="_blank" class="nav-link px-2 text-muted">Florin</a>
+          </li>
+          <li class="nav-item">
+            <a href="https://github.com/rich-p-rich" target="_blank" class="nav-link px-2 text-muted">Richard</a>
+          </li>
+          <li class="nav-item">
+            <a href="https://github.com/jnehmeh87" target="_blank" class="nav-link px-2 text-muted">Jad</a>
+          </li>
+          <li class="nav-item">
+            <a href="https://github.com/Shaf8808" target="_blank" class="nav-link px-2 text-muted">Shaf</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" target="_blank" class="nav-link px-2 text-muted">John</a>
+          </li>
+        </ul>
+        
+      </footer>
+    </div>
     {% endblock %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 </body>
